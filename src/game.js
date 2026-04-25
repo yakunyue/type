@@ -7,6 +7,7 @@ import {Enemy, setEnemySpeed, addEnemySpeed, initEnemySpeed} from './object/enem
 import {initResources} from './resource';
 import {hideInfo, showInfo} from './util';
 import {Animation} from './object/animation';
+import {initLeaderboardUI} from './leaderboard';
 
 import cnchar from 'cnchar';
 import poly from 'cnchar-poly';
@@ -66,6 +67,7 @@ function setPos () {
 }
 function initObjects () {
     initResources();
+    initLeaderboardUI();
     Game.player = new Player();
     Game.enemys = new Array();
     Game.bullets = new Array();
@@ -86,9 +88,6 @@ function initObjects () {
     };
     J.cls('key-item').clk('_sendBullet(this.txt())');
     J.id('help').clk('J.id("helpPage").fadeIn()');
-    J.id('github').clk(function () {
-        J.open('https://github.com/theajack/type');
-    });
     J.id('helpPage').clk('this.fadeOut()');
     Game.bgMoveAni = new Animation({
         ctx: Game.ctx,

@@ -9,6 +9,7 @@ import J from 'jetterjs';
 import {getFireImg, getPlayerErrImg, getPlayerImg} from '../resource';
 import {Game, Size} from '../store';
 import {showInfo} from '../util';
+import {showGameOverLeaderboard} from '../leaderboard';
 import {Animation} from './animation';
 
 export class Player {
@@ -121,6 +122,7 @@ export class Player {
     die () {
         Game.isStop = true;
         showInfo('游戏失败');
+        showGameOverLeaderboard(this.score);
     };
     setLetterNum (a) {
         if (a == undefined) {

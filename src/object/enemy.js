@@ -149,7 +149,13 @@ export class Enemy {
             Game.ctx.font = '20px MicrosoftYahei';
             let a = this.y - this.h / 2;
             Game.ctx.drawImage(this.img, this.x - this.w / 2, a, this.w, this.h);
-            Game.ctx.fillText(this.words, this.x, a - 8);
+            // 文字往上挪，避免被飞机图片遮挡；同时描边增强可读性
+            const textY = a - 16;
+            Game.ctx.lineWidth = 4;
+            Game.ctx.strokeStyle = 'rgba(0,0,0,.55)';
+            Game.ctx.strokeText(this.words, this.x, textY);
+            Game.ctx.fillStyle = '#fff';
+            Game.ctx.fillText(this.words, this.x, textY);
             Game.ctx.fillStyle = '#f44';
             a += this.h;
             Game.ctx.fillRect(this.x - this.hpBarW / 2, a + HPPerWidth, this.hpBarW, HPHeight);

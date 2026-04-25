@@ -51,11 +51,11 @@
         <div id="restart" class="func-item">
           <img src="https://cdn.jsdelivr.net/gh/theajack/type/docs/images/restart.png" alt="" />
         </div>
+        <div id="leaderboardBtn" class="func-item">
+          <span class="func-text">榜</span>
+        </div>
         <div id="help" class="func-item">
           <img src="https://cdn.jsdelivr.net/gh/theajack/type/docs/images/help.png" alt="" />
-        </div>
-        <div id="github" class="func-item">
-          <img src="https://cdn.jsdelivr.net/gh/theajack/type/docs/images/github.png" alt="" />
         </div>
       </div>
       <div id="showInfo">
@@ -107,6 +107,26 @@
       <div class="text">数字5：重新开始</div>
       <div class="text small">建议在电脑上打开该游戏</div>
       <div class="text small link">shiyix.cn/type</div>
+    </div>
+
+    <div id="leaderboardMask">
+      <div id="leaderboardDialog">
+        <div id="leaderboardTitle" class="lb-title">排行榜</div>
+        <div id="leaderboardSubmitSection">
+          <div class="lb-sub">本局得分：<span id="leaderboardScore">0</span></div>
+          <div class="lb-ask">是否留下你的大名？</div>
+          <div class="lb-form">
+            <input id="leaderboardName" maxlength="24" placeholder="输入名字（最多24字）" />
+            <button id="leaderboardSubmit">提交</button>
+            <button id="leaderboardSkip" class="lb-ghost">跳过</button>
+          </div>
+        </div>
+        <div class="lb-list-title">排行榜（同名取最高分）</div>
+        <div id="leaderboardList"></div>
+        <div class="lb-actions">
+          <button id="leaderboardClose" class="lb-ghost">关闭</button>
+        </div>
+      </div>
     </div>
     <script>
       (function () {

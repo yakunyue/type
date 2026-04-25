@@ -13,6 +13,13 @@ module.exports = {
             directory: path.resolve('./', 'docs'),
         },
         historyApiFallback: true,
+        proxy: [
+            {
+                context: ['/api'],
+                target: 'http://localhost:3000',
+                changeOrigin: true,
+            },
+        ],
         host: 'localhost'// '0.0.0.0' //
     },
     module: {
