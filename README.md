@@ -1,14 +1,12 @@
-# [TYPE](https://github.com/theajack/type)
+# [TYPE](https://github.com/yakunyue/type)
 ## 汉字打字游戏
 
 基于[cnchar](https://github.com/theajack/cnchar)的拼音打字游戏
 
-[开始游戏](https://theajack.github.io/type/)
-
 ### dev
 
 ```
-git clone https://github.com/theajack/type.git
+git clone https://github.com/yakunyue/type
 
 cd type
 npm install
