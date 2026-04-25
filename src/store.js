@@ -22,6 +22,8 @@ export const Game = {
     isPause: false,
     bgMoveAni: null,
     loopIndex: 0,
+    // 1: 字母串  2: 常用英文单词  3: 汉字（拼音）
+    difficulty: 3,
 };
 
 export const Const = {

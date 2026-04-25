@@ -14,12 +14,30 @@ cnchar.use(poly);
 
 window.J = J;
 
+function initDifficulty () {
+    const saved = localStorage.getItem('_typeDifficulty');
+    const d = saved ? parseInt(saved) : 3;
+    Game.difficulty = (d === 1 || d === 2 || d === 3) ? d : 3;
+    const select = document.getElementById('difficultySelect');
+    if (select) {
+        select.value = String(Game.difficulty);
+        select.addEventListener('change', function () {
+            const v = parseInt(select.value);
+            Game.difficulty = (v === 1 || v === 2 || v === 3) ? v : 3;
+            localStorage.setItem('_typeDifficulty', String(Game.difficulty));
+            showInfo('难度已切换', true, 800);
+            restart();
+        });
+    }
+}
+
 J.ready(function () {
     if (J.isMobile()) {
         setBulletSpeed(15);
         setEnemySpeed(0.3, 1.5);
         Game.addEnemyTime = 10000;
     }
+    initDifficulty();
     initCanvas();
     initObjects();
     start();
