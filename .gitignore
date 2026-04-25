@@ -1,2 +1,6 @@
 /node_modules
 pnpm-lock.yaml
+
+# build artifacts
+/dist
+/dist.zip

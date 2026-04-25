@@ -4,15 +4,16 @@ module.exports = {
     mode: 'development',
     entry: path.resolve('./', 'src/game.js'),
     output: {
-        path: path.resolve('./', 'docs'),
+        path: path.resolve('./', 'dist'),
         filename: 'game.min.js'
     },
     devtool: 'eval-source-map',
     devServer: {
         host: '0.0.0.0',
         port: 18081,
+        allowedHosts: 'all',
         static: {
-            directory: path.resolve('./', 'docs'),
+            directory: path.resolve('./', 'public'),
         },
         historyApiFallback: true,
         proxy: [
@@ -22,7 +23,6 @@ module.exports = {
                 changeOrigin: true,
             },
         ],
-        host: 'localhost'// '0.0.0.0' //
     },
     module: {
         rules: [{

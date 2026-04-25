@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="keywords" content="打字游戏,汉字,打汉字,汉字拼音">
+    <meta name="description" content="一款汉字拼音的打字游戏">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+    <title>练习汉字拼音打字的da飞机游戏-typing by theajack</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+  </head>
+  <body>
+    <img class="wc-share-logo " src="https://cdn.jsdelivr.net/gh/theajack/type/docs/images/share.png"/>
+    <div id="background"></div>
+    <div id="gameWrapper">
+      <canvas id="gameCanvas"></canvas>
+      <div id="scoreWrapper">
+        <div class="score-item">
+          <span class="score-title">最高分：</span>
+          <span id="bestScore">0</span>
+        </div>
+        <div class="score-item">
+          <span class="score-title">分数：</span>
+          <span id="score">0</span>
+        </div>
+        <div class="score-item">
+          <span class="score-title">字母数：</span>
+          <span id="letterNum">0</span>
+        </div>
+        <div class="score-item">
+          <span class="score-title">难度：</span>
+          <select id="difficultySelect">
+            <option value="1">1（字母）</option>
+            <option value="2">2（单词）</option>
+            <option value="3">3（汉字）</option>
+          </select>
+        </div>
+      </div>
+      <div id="protect">
+      3
+      </div>
+      <div id="funcWrapper">
+        <div id="pause" class="func-item">
+          <img src="https://cdn.jsdelivr.net/gh/theajack/type/docs/images/pause.png" alt="" />
+        </div>
+        <div id="restart" class="func-item">
+          <img src="https://cdn.jsdelivr.net/gh/theajack/type/docs/images/restart.png" alt="" />
+        </div>
+        <div id="leaderboardBtn" class="func-item">
+          <span class="func-text">榜</span>
+        </div>
+        <div id="help" class="func-item">
+          <img src="https://cdn.jsdelivr.net/gh/theajack/type/docs/images/help.png" alt="" />
+        </div>
+      </div>
+      <div id="showInfo">
+        游戏失败
+      </div>
+      <div id="keyboard">
+        <div class="i-w"><div class="key-item">q</div></div>
+        <div class="i-w"><div class="key-item">w</div></div>
+        <div class="i-w"><div class="key-item">e</div></div>
+        <div class="i-w"><div class="key-item">r</div></div>
+        <div class="i-w"><div class="key-item">t</div></div>
+        <div class="i-w"><div class="key-item">y</div></div>
+        <div class="i-w"><div class="key-item">u</div></div>
+        <div class="i-w"><div class="key-item">i</div></div>
+        <div class="i-w"><div class="key-item">o</div></div>
+        <div class="i-w"><div class="key-item">p</div></div>
+
+        <div class="i-w-half-blank"></div>
+        <div class="i-w"><div class="key-item">a</div></div>
+        <div class="i-w"><div class="key-item">s</div></div>
+        <div class="i-w"><div class="key-item">d</div></div>
+        <div class="i-w"><div class="key-item">f</div></div>
+        <div class="i-w"><div class="key-item">g</div></div>
+        <div class="i-w"><div class="key-item">h</div></div>
+        <div class="i-w"><div class="key-item">j</div></div>
+        <div class="i-w"><div class="key-item">k</div></div>
+        <div class="i-w"><div class="key-item">l</div></div>
+        <div class="i-w-half-blank"></div>
+
+        <div class="i-w-half-blank"></div>
+        <div class="i-w-blank"></div>
+
+        <div class="i-w"><div class="key-item">z</div></div>
+        <div class="i-w"><div class="key-item">x</div></div>
+        <div class="i-w"><div class="key-item">c</div></div>
+        <div class="i-w"><div class="key-item">v</div></div>
+        <div class="i-w"><div class="key-item">b</div></div>
+        <div class="i-w"><div class="key-item">n</div></div>
+        <div class="i-w"><div class="key-item">m</div></div>
+        <div class="i-w-blank"></div>
+        <div class="i-w-half-blank"></div>
+      </div>
+    </div>
+
+    <div id="helpPage">
+      <div class="text">通过拼音打字发射导弹击毁敌机</div>
+      <div class="text">以下为快捷键</div>
+      <div class="text">回车键：开启护盾</div>
+      <div class="text">空格键：暂停/开始</div>
+      <div class="text">数字5：重新开始</div>
+      <div class="text small">建议在电脑上打开该游戏</div>
+      <div class="text small link">shiyix.cn/type</div>
+    </div>
+
+    <div id="leaderboardMask">
+      <div id="leaderboardDialog">
+        <div id="leaderboardTitle" class="lb-title">排行榜</div>
+        <div id="leaderboardSubmitSection">
+          <div class="lb-sub">本局得分：<span id="leaderboardScore">0</span></div>
+          <div class="lb-ask">是否留下你的大名？</div>
+          <div class="lb-form">
+            <input id="leaderboardName" maxlength="24" placeholder="输入名字（最多24字）" />
+            <button id="leaderboardSubmit">提交</button>
+            <button id="leaderboardSkip" class="lb-ghost">跳过</button>
+          </div>
+        </div>
+        <div class="lb-list-title">排行榜（同名取最高分）</div>
+        <div id="leaderboardList"></div>
+        <div class="lb-actions">
+          <button id="leaderboardClose" class="lb-ghost">关闭</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/game.min.js"></script>
+  </body>
+</html>
+

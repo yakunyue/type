@@ -4,7 +4,7 @@ module.exports = {
     mode: 'production',
     entry: path.resolve('./', 'src/game.js'),
     output: {
-        path: path.resolve('./', 'docs'),
+        path: path.resolve('./', 'dist'),
         filename: 'game.min.js',
         library: 'game',
         libraryTarget: 'umd',
