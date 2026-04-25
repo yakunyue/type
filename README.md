@@ -13,3 +13,10 @@ npm install
 
 npm run dev
 ```
+
+后台启动
+
+```
+nohup npm run dev > type.log 2>&1 & echo $! > type.pid
+
+```

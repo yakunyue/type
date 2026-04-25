@@ -9,6 +9,8 @@ module.exports = {
     },
     devtool: 'eval-source-map',
     devServer: {
+        host: '0.0.0.0',
+        port: 18081,
         static: {
             directory: path.resolve('./', 'docs'),
         },
@@ -16,7 +18,7 @@ module.exports = {
         proxy: [
             {
                 context: ['/api'],
-                target: 'http://localhost:3000',
+                target: 'http://localhost:18082',
                 changeOrigin: true,
             },
         ],

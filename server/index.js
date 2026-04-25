@@ -74,7 +74,7 @@ app.post('/api/score', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 18082;
 app.listen(PORT, () => {
     console.log('[leaderboard] listening on http://localhost:' + PORT);
 });
