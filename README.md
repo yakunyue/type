@@ -14,9 +14,10 @@ npm install
 npm run dev
 ```
 
-后台启动
+启动排行服务
 
 ```
-nohup npm run dev > type.log 2>&1 & echo $! > type.pid
+cd /vol2/1000/app/type-master
+PORT=18082 nohup node server/index.js > leaderboard.log 2>&1 &
 
 ```
