@@ -8,6 +8,7 @@
 import J from 'jetterjs';
 import {getDieImg, getEnemyImg} from '../resource';
 import {Const, Game, Size} from '../store';
+import {playSound} from '../sound';
 
 let EnemySpeed = 0;
 let EnemySpeedMax = 2;
@@ -186,8 +187,10 @@ export class Enemy {
         return (this.y + this.h / 2 > Game.player.y - Game.player.h / 2);
     }
     die () {
+        if (this.isDie) return;
         this.dieIndex = 0;
         this.isDie = true;
+        playSound('kill');
     }
     remove () {
         this.isRemove = true;

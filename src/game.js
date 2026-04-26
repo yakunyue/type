@@ -8,6 +8,7 @@ import {initResources} from './resource';
 import {hideInfo, showInfo} from './util';
 import {Animation} from './object/animation';
 import {initLeaderboardUI} from './leaderboard';
+import {initSound, isMuted, playSound, toggleMuted} from './sound';
 
 import cnchar from 'cnchar';
 import poly from 'cnchar-poly';
@@ -43,6 +44,7 @@ J.ready(function () {
         Game.baseAddEnemyTime = 4000;
         Game.minAddEnemyTime = 800;
     }
+    initSound();
     initDifficulty();
     initCanvas();
     initObjects();
@@ -84,6 +86,17 @@ function initObjects () {
         pause();
     };
     J.id('pause').clk('_pause()');
+    window._toggleSound = function () {
+        const m = toggleMuted();
+        const st2 = J.id('soundToggle');
+        if (st2 && st2.child) st2.child(0).txt(m ? '静' : '音');
+        showInfo(m ? '音效已关闭' : '音效已开启', true, 800);
+    };
+    const st = J.id('soundToggle');
+    if (st && st.clk) {
+        st.clk('_toggleSound()');
+        if (st.child) st.child(0).txt(isMuted() ? '静' : '音');
+    }
     window._restart = function () {
         restart();
     };
@@ -152,20 +165,24 @@ function pause () {
         if (!Game.isPause) {
             Game.isPause = true;
             J.id('pause').child(0).attr('src', 'https://cdn.jsdelivr.net/gh/theajack/type/docs/images/start.png');
+            playSound('pause');
             showInfo('暂停中');
         } else {
             Game.isPause = false;
             J.id('pause').child(0).attr('src', 'https://cdn.jsdelivr.net/gh/theajack/type/docs/images/pause.png');
+            playSound('resume');
             hideInfo();
         }
     }
 }
 function sendBullet (a) {
     if (Game.enemys.length > 0) {
+        playSound('shoot');
         Game.bullets.append(new Bullet(a));
     } else {
         showInfo('没有找到目标', true, 1000);
         Game.player.setErr();
+        playSound('error');
     }
 }
 function restart () {

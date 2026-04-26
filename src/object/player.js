@@ -11,6 +11,7 @@ import {Game, Size} from '../store';
 import {showInfo} from '../util';
 import {showGameOverLeaderboard} from '../leaderboard';
 import {Animation} from './animation';
+import {playSound} from '../sound';
 
 export class Player {
     constructor () {
@@ -105,6 +106,7 @@ export class Player {
     };
     setErr () {
         this.err_i = 0;
+        playSound('error');
     };
     setDeg (a) {
         this.deg = a;
@@ -116,11 +118,13 @@ export class Player {
         if (!this.isClear && !Game.isStop && !Game.isPause) {
             if (this.setProtect()) {
                 this.isClear = true;
+                playSound('shield');
             }
         }
     };
     die () {
         Game.isStop = true;
+        playSound('gameover');
         showInfo('游戏失败');
         showGameOverLeaderboard(this.score);
     };
@@ -135,6 +139,7 @@ export class Player {
     setScore (a) {
         if (a == undefined) {
             this.score++;
+            playSound('score');
         } else {
             this.score = a;
         }

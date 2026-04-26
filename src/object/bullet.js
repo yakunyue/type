@@ -1,6 +1,7 @@
 import {getBulletImg, getDieImg} from '../resource';
 import {Game} from '../store';
 import {showInfo} from '../util';
+import {playSound} from '../sound';
 
 let BulletSpeed = 15; // 30
 
@@ -40,6 +41,7 @@ export class Bullet {
                     this.y -= this.speed * Math.cos(this.deg);
                     if (this.touchTarget()) {
                         this.target.hurt();
+                        playSound('hit');
                         this.die();
                     }
                 }
@@ -80,6 +82,7 @@ export class Bullet {
         }
         Game.player.setErr();
         showInfo('没有找到目标', true, 1000);
+        playSound('error');
         return null;
     }
     touchTarget () {
