@@ -37,6 +37,11 @@ J.ready(function () {
         setBulletSpeed(15);
         setEnemySpeed(0.3, 1.5);
         Game.addEnemyTime = 10000;
+        Game.baseAddEnemyTime = 10000;
+        Game.minAddEnemyTime = 2500;
+    } else {
+        Game.baseAddEnemyTime = 4000;
+        Game.minAddEnemyTime = 800;
     }
     initDifficulty();
     initCanvas();
@@ -100,12 +105,22 @@ function initObjects () {
     });
 }
 function geneEnemy () {
-    Game.enemys.append(new Enemy());
-    setInterval(function () {
+    if (Game.enemySpawnTimer) {
+        clearTimeout(Game.enemySpawnTimer);
+        Game.enemySpawnTimer = null;
+    }
+    const schedule = function () {
         if (!Game.isStop && !Game.isPause) {
             Game.enemys.append(new Enemy());
         }
-    }, Game.addEnemyTime);
+        // 随时间逐步加快刷怪：每 ~9.6s（600 帧）减少 200ms，直到 minAddEnemyTime
+        const step = Math.floor((Game.loopIndex || 0) / 600);
+        const base = (Game.baseAddEnemyTime ?? Game.addEnemyTime ?? 4000);
+        const min = (Game.minAddEnemyTime ?? 800);
+        Game.addEnemyTime = Math.max(min, base - step * 200);
+        Game.enemySpawnTimer = setTimeout(schedule, Game.addEnemyTime);
+    };
+    schedule();
 }
 
 const start = window.requestAnimationFrame ? () => {
@@ -164,6 +179,7 @@ function restart () {
     Game.player.restart();
     initEnemySpeed();
     hideInfo();
+    geneEnemy();
 }
 window.onkeydown = function (a) {
     const b = a.keyCode;
