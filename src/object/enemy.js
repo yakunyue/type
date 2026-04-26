@@ -51,8 +51,17 @@ function randomLetters (minLen, maxLen) {
     return s;
 }
 
+function randomRepeatLetter (minLen, maxLen) {
+    const len = J.random(minLen, maxLen);
+    const c = EasyLetters[J.random(0, EasyLetters.length - 1)];
+    return c.repeat(len);
+}
+
 function pickWordByDifficulty (type) {
-    const d = Game.difficulty || 3;
+    const d = (Game.difficulty ?? 3);
+    if (d === 0) {
+        return randomRepeatLetter(1, (type === 0 ? 2 : 3));
+    }
     if (d === 1) {
         return randomLetters(1, (type === 0 ? 3 : 4));
     }
@@ -90,7 +99,7 @@ export class Enemy {
         this.x = J.checkArg(x, J.random(0, Size.gameWidth));
         this.y = J.checkArg(y, -this.h);
         this.words = pickWordByDifficulty(this.type);
-        if ((Game.difficulty || 3) === 3 && this.words && this.words.spell) {
+        if ((Game.difficulty ?? 3) === 3 && this.words && this.words.spell) {
             this.pinyin = this.words.spell('low');
         } else {
             this.pinyin = ('' + this.words).toLowerCase();
